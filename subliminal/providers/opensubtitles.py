@@ -32,7 +32,7 @@ class OpenSubtitlesSubtitle(Subtitle):
         self.movie_kind = movie_kind
         self.hash = hash
         self.movie_name = movie_name
-        self.movie_release_name = movie_release_name
+        self.movie_release_name = re.sub(r"[\(\[\)\]\{\}]", " ", movie_release_name)
         self.movie_year = movie_year
         self.movie_imdb_id = movie_imdb_id
         self.series_season = series_season
@@ -192,6 +192,7 @@ class OpenSubtitlesProvider(Provider):
             hash = subtitle_item['MovieHash']
             movie_name = subtitle_item['MovieName']
             movie_release_name = subtitle_item['MovieReleaseName']
+
             movie_year = int(subtitle_item['MovieYear']) if subtitle_item['MovieYear'] else None
             movie_imdb_id = 'tt' + subtitle_item['IDMovieImdb']
             series_season = int(subtitle_item['SeriesSeason']) if subtitle_item['SeriesSeason'] else None
