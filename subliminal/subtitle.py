@@ -232,9 +232,9 @@ def guess_matches(video, guess, partial=False):
     if video.resolution and 'screen_size' in guess and guess['screen_size'] == video.resolution:
         matches.add('resolution')
     # format
-    if type(video.format) is list:
-        for f in video.format:
-            if video.format and 'format' in guess and guess['format'].lower() == f.lower():
+    if type(guess['format']) is list:
+        for f in guess['format']:
+            if video.format and 'format' in guess and f.lower() == video.format.lower():
                 matches.add('format')
     else:
         if video.format and 'format' in guess and guess['format'].lower() == video.format.lower():
